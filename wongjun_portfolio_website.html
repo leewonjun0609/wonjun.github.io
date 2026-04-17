@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이원준 포트폴리오</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --accent: #c8a96e;
+    --accent2: #e8c98e;
+    --text: #f0ece4;
+    --muted: #888;
+    --border: rgba(200,169,110,0.2);
+    --card: #181818;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; min-height: 100vh; }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; width:100%; z-index:100;
+    background: rgba(13,13,13,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 60px;
+  }
+  .nav-logo { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; color: var(--accent); letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; letter-spacing: 1px; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-admin-btn { background: none; border: 1px solid var(--border); color: var(--accent); padding: 5px 14px; font-size: 0.75rem; cursor: pointer; border-radius: 4px; font-family: 'Noto Sans KR', sans-serif; transition: all .2s; }
+  .nav-admin-btn:hover { background: var(--accent); color: #000; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 2rem 2rem;
+    background: radial-gradient(ellipse at center top, rgba(200,169,110,0.08) 0%, transparent 60%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(200,169,110,0.03) 60px, rgba(200,169,110,0.03) 61px),
+                repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(200,169,110,0.03) 60px, rgba(200,169,110,0.03) 61px);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index:1; }
+  .hero-tag { font-size: 0.72rem; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; }
+  .hero-name { font-family: 'Noto Serif KR', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; line-height: 1.1; color: var(--text); margin-bottom: 1rem; }
+  .hero-name span { color: var(--accent); }
+  .hero-sub { font-size: 1rem; color: var(--muted); font-weight: 300; letter-spacing: 2px; margin-bottom: 2.5rem; }
+  .hero-cta { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 12px 32px; font-size: 0.82rem; letter-spacing: 2px; text-decoration: none; cursor: pointer; background: none; font-family: 'Noto Sans KR', sans-serif; transition: all .3s; border-radius: 2px; }
+  .hero-cta:hover { background: var(--accent); color: #000; }
+
+  /* MONKEY SECTION */
+  .monkey-section {
+    text-align: center; padding: 3rem 2rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .monkey-label { font-size: 0.65rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 1rem; }
+  .monkey-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+  .monkey-caption { font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  /* SECTIONS */
+  section { padding: 80px 2rem; max-width: 900px; margin: 0 auto; }
+  .section-label { font-size: 0.65rem; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Noto Serif KR', serif; font-size: 1.8rem; font-weight: 400; color: var(--text); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
+  .about-avatar { width: 100%; aspect-ratio: 3/4; background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.8rem; position: relative; overflow: hidden; cursor: pointer; transition: border-color .2s; }
+  .about-avatar:hover { border-color: var(--accent); }
+  .about-avatar .upload-hint { position: absolute; bottom: 1rem; left:0; right:0; text-align: center; font-size: 0.72rem; color: var(--muted); }
+  .about-info h3 { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; color: var(--accent); margin-bottom: 1rem; }
+  .about-text { font-size: 0.9rem; line-height: 1.9; color: var(--muted); font-weight: 300; }
+  .about-meta { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .meta-item { display: flex; gap: 1rem; font-size: 0.82rem; }
+  .meta-label { color: var(--accent); min-width: 60px; }
+  .meta-val { color: var(--muted); }
+
+  /* ACTIVITIES */
+  .activity-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .activity-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; transition: border-color .2s; }
+  .activity-card:hover { border-color: var(--accent); }
+  .activity-period { font-size: 0.72rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.4rem; }
+  .activity-title { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; }
+  .activity-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* PROJECTS */
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color .2s, transform .2s; cursor: pointer; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-thumb { height: 160px; background: var(--bg3); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.75rem; position: relative; overflow: hidden; }
+  .project-thumb img { width:100%; height:100%; object-fit:cover; }
+  .project-thumb .upload-btn { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.7); color: var(--accent); border: 1px solid var(--accent); padding: 4px 10px; font-size: 0.68rem; cursor: pointer; border-radius: 3px; font-family: 'Noto Sans KR', sans-serif; display: none; }
+  .project-thumb:hover .upload-btn { display: block; }
+  .project-body { padding: 1.25rem; }
+  .project-tag { font-size: 0.68rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 0.4rem; }
+  .project-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+  /* GALLERY */
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .gallery-item { aspect-ratio: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; transition: border-color .2s; }
+  .gallery-item:hover { border-color: var(--accent); }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; }
+  .gallery-item .add-icon { font-size: 1.5rem; color: var(--muted); user-select: none; }
+  .gallery-item .add-label { font-size: 0.68rem; color: var(--muted); margin-top: 4px; }
+
+  /* VIDEO */
+  .video-section { padding: 80px 2rem; max-width: 900px; margin: 0 auto; }
+  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .video-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .video-thumb { height: 160px; background: var(--bg3); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-bottom: 1px solid var(--border); position: relative; }
+  .video-play { width: 44px; height: 44px; border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .video-add-label { font-size: 0.72rem; color: var(--muted); }
+  .video-body { padding: 1rem; }
+  .video-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.3rem; }
+  .video-desc { font-size: 0.78rem; color: var(--muted); }
+
+  /* CONTACT */
+  .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-row { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-icon { color: var(--accent); font-size: 0.9rem; min-width: 18px; margin-top: 2px; }
+  .contact-detail-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; }
+  .contact-detail-val { font-size: 0.88rem; color: var(--text); margin-top: 2px; }
+  .contact-form { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-form input, .contact-form textarea {
+    background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+    padding: 10px 14px; font-size: 0.85rem; font-family: 'Noto Sans KR', sans-serif;
+    border-radius: 3px; outline: none; transition: border-color .2s; resize: vertical;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea { min-height: 100px; }
+  .contact-form button { background: var(--accent); color: #000; border: none; padding: 10px 24px; font-size: 0.82rem; font-weight: 700; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; border-radius: 3px; transition: background .2s; align-self: flex-start; }
+  .contact-form button:hover { background: var(--accent2); }
+
+  /* DIVIDER */
+  .full-divider { border: none; border-top: 1px solid var(--border); max-width: 900px; margin: 0 auto; }
+
+  /* ADMIN MODAL */
+  .modal-bg { display: none; position: fixed; inset:0; background: rgba(0,0,0,0.85); z-index:200; align-items: center; justify-content: center; }
+  .modal-bg.active { display: flex; }
+  .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; width: 360px; max-width: 90vw; }
+  .modal h2 { font-family: 'Noto Serif KR', serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 0.25rem; }
+  .modal p { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .modal input { width: 100%; background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; font-size: 0.85rem; font-family: 'Noto Sans KR', sans-serif; border-radius: 3px; outline: none; margin-bottom: 0.75rem; transition: border-color .2s; }
+  .modal input:focus { border-color: var(--accent); }
+  .modal-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+  .modal-actions button { flex:1; padding: 10px; font-size: 0.82rem; font-family: 'Noto Sans KR', sans-serif; border-radius: 3px; cursor: pointer; border: none; }
+  .btn-login { background: var(--accent); color: #000; font-weight: 700; }
+  .btn-cancel { background: var(--bg3); color: var(--muted); border: 1px solid var(--border) !important; }
+  .modal-error { font-size: 0.78rem; color: #e24b4a; margin-top: -0.25rem; margin-bottom: 0.5rem; min-height: 18px; }
+
+  /* ADMIN PANEL */
+  .admin-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index:150; background: rgba(13,13,13,0.96); border-top: 1px solid var(--accent); padding: 12px 2rem; align-items: center; gap: 1rem; }
+  .admin-bar.active { display: flex; }
+  .admin-bar span { font-size: 0.78rem; color: var(--accent); flex:1; }
+  .admin-bar button { background: none; border: 1px solid var(--border); color: var(--muted); padding: 6px 14px; font-size: 0.75rem; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; border-radius: 3px; transition: all .2s; }
+  .admin-bar button:hover { color: var(--accent); border-color: var(--accent); }
+  .admin-bar .logout { border-color: #e24b4a; color: #e24b4a; }
+
+  /* EDIT OVERLAY */
+  .editable { position: relative; cursor: text; }
+  .editable:hover::after { content: '✏'; position: absolute; top: -6px; right: -6px; font-size: 10px; background: var(--accent); color: #000; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; line-height: 18px; }
+  [contenteditable="true"] { outline: 1px dashed var(--accent); padding: 2px 4px; border-radius: 2px; }
+
+  footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+  footer p { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; }
+
+  input[type="file"] { display: none; }
+  .scroll-indicator { margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .scroll-indicator span { font-size: 0.65rem; letter-spacing: 3px; color: var(--muted); }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">이원준</div>
+  <ul class="nav-links">
+    <li><a href="#about">자기소개</a></li>
+    <li><a href="#activities">활동</a></li>
+    <li><a href="#projects">프로젝트</a></li>
+    <li><a href="#gallery">작품</a></li>
+    <li><a href="#contact">연락처</a></li>
+  </ul>
+  <button class="nav-admin-btn" onclick="openLogin()">관리자</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <p class="hero-tag">Portfolio 2024–2025</p>
+    <h1 class="hero-name">이<span>원준</span></h1>
+    <p class="hero-sub" id="hero-sub">꿈을 향해 나아가는 학생</p>
+    <button class="hero-cta" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">소개 보기</button>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </div>
+</div>
+
+<!-- MONKEY (required - prompt unchanged) -->
+<div class="monkey-section">
+  <p class="monkey-label">🐒 Special Guest</p>
+  <img class="monkey-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Macaca_nigra_self-portrait_large.jpg/300px-Macaca_nigra_self-portrait_large.jpg" alt="원숭이" onerror="this.style.display='none'" />
+  <p class="monkey-caption">이 원숭이는 이 포트폴리오를 응원합니다 🐒</p>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Who I Am</p>
+  <h2 class="section-title">자기소개</h2>
+  <div class="about-grid">
+    <div>
+      <div class="about-avatar" onclick="isAdmin && triggerUpload('profile-upload')">
+        <img id="profile-img" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:4px;" />
+        <div id="avatar-placeholder">
+          <div style="text-align:center;">
+            <div style="font-size:2rem; margin-bottom:0.5rem; opacity:0.3;">👤</div>
+            <div style="font-size:0.72rem; color:var(--muted);">프로필 사진</div>
+          </div>
+          <div class="upload-hint">클릭하여 사진 업로드</div>
+        </div>
+      </div>
+      <input type="file" id="profile-upload" accept="image/*" onchange="loadImage(event,'profile-img','avatar-placeholder')" />
+    </div>
+    <div class="about-info">
+      <h3>안녕하세요, 이원준입니다 👋</h3>
+      <p class="about-text" id="about-text" contenteditable="false">
+        저는 미래를 향해 꾸준히 나아가는 학생입니다. 다양한 교내외 활동과 프로젝트 경험을 통해 성장해 왔으며, 열정과 성실함으로 도전하는 삶을 살아가고 있습니다.<br><br>새로운 것을 배우는 것을 즐기고, 팀과 함께 협력하며 더 나은 결과를 만들어가는 것에서 보람을 느낍니다.
+      </p>
+      <div class="about-meta">
+        <div class="meta-item"><span class="meta-label">이름</span><span class="meta-val">이원준</span></div>
+        <div class="meta-item"><span class="meta-label">이메일</span><span class="meta-val">24kwai0309@sonline20.sen.go.kr</span></div>
+        <div class="meta-item"><span class="meta-label">학교</span><span class="meta-val" id="school-val" contenteditable="false">학교명을 입력하세요</span></div>
+        <div class="meta-item"><span class="meta-label">학년</span><span class="meta-val" id="grade-val" contenteditable="false">고등학교 x학년</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <p class="section-label">Experience</p>
+  <h2 class="section-title">주요 교내외 활동</h2>
+  <div class="activity-list" id="activity-list">
+    <div class="activity-card">
+      <p class="activity-period" contenteditable="false">2024.03 – 2024.12</p>
+      <p class="activity-title" contenteditable="false">활동명을 입력하세요 (예: 학생회 부회장)</p>
+      <p class="activity-desc" contenteditable="false">활동 내용과 역할, 배운 점 등을 자유롭게 입력하세요. 이 경험을 통해 리더십과 협동심을 키울 수 있었습니다.</p>
+    </div>
+    <div class="activity-card">
+      <p class="activity-period" contenteditable="false">2024.06</p>
+      <p class="activity-title" contenteditable="false">활동명을 입력하세요 (예: 교내 과학 경시대회 수상)</p>
+      <p class="activity-desc" contenteditable="false">활동 내용을 입력하세요.</p>
+    </div>
+    <div class="activity-card">
+      <p class="activity-period" contenteditable="false">2023 – 2024</p>
+      <p class="activity-title" contenteditable="false">활동명을 입력하세요 (예: 동아리 활동)</p>
+      <p class="activity-desc" contenteditable="false">활동 내용을 입력하세요.</p>
+    </div>
+  </div>
+  <button onclick="addActivity()" id="add-activity-btn" style="display:none; margin-top:1rem; background:none; border:1px dashed var(--border); color:var(--muted); width:100%; padding:12px; font-size:0.82rem; cursor:pointer; border-radius:4px; font-family:'Noto Sans KR',sans-serif; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">+ 활동 추가</button>
+</section>
+
+<hr class="full-divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Works</p>
+  <h2 class="section-title">프로젝트 경험</h2>
+  <div class="project-grid" id="project-grid">
+    <div class="project-card">
+      <div class="project-thumb" onclick="isAdmin && triggerUpload('proj-img-1')">
+        <img id="proj-img-1-display" style="display:none;width:100%;height:100%;object-fit:cover;" />
+        <span id="proj-img-1-placeholder" style="font-size:0.75rem;color:var(--muted);">프로젝트 이미지 추가</span>
+        <button class="upload-btn" onclick="event.stopPropagation(); triggerUpload('proj-img-1')">사진 추가</button>
+        <input type="file" id="proj-img-1" accept="image/*" onchange="loadProjImage(event,'proj-img-1-display','proj-img-1-placeholder')" />
+      </div>
+      <div class="project-body">
+        <p class="project-tag" contenteditable="false">분야 (예: 프로그래밍)</p>
+        <p class="project-name" contenteditable="false">프로젝트명을 입력하세요</p>
+        <p class="project-desc" contenteditable="false">프로젝트 내용, 사용 기술, 결과물 등을 간략히 소개하세요.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb" onclick="isAdmin && triggerUpload('proj-img-2')">
+        <img id="proj-img-2-display" style="display:none;width:100%;height:100%;object-fit:cover;" />
+        <span id="proj-img-2-placeholder" style="font-size:0.75rem;color:var(--muted);">프로젝트 이미지 추가</span>
+        <button class="upload-btn" onclick="event.stopPropagation(); triggerUpload('proj-img-2')">사진 추가</button>
+        <input type="file" id="proj-img-2" accept="image/*" onchange="loadProjImage(event,'proj-img-2-display','proj-img-2-placeholder')" />
+      </div>
+      <div class="project-body">
+        <p class="project-tag" contenteditable="false">분야 (예: 탐구활동)</p>
+        <p class="project-name" contenteditable="false">프로젝트명을 입력하세요</p>
+        <p class="project-desc" contenteditable="false">프로젝트 내용을 입력하세요.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb" onclick="isAdmin && triggerUpload('proj-img-3')">
+        <img id="proj-img-3-display" style="display:none;width:100%;height:100%;object-fit:cover;" />
+        <span id="proj-img-3-placeholder" style="font-size:0.75rem;color:var(--muted);">프로젝트 이미지 추가</span>
+        <button class="upload-btn" onclick="event.stopPropagation(); triggerUpload('proj-img-3')">사진 추가</button>
+        <input type="file" id="proj-img-3" accept="image/*" onchange="loadProjImage(event,'proj-img-3-display','proj-img-3-placeholder')" />
+      </div>
+      <div class="project-body">
+        <p class="project-tag" contenteditable="false">분야 (예: 예술/창작)</p>
+        <p class="project-name" contenteditable="false">프로젝트명을 입력하세요</p>
+        <p class="project-desc" contenteditable="false">프로젝트 내용을 입력하세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-label">Gallery</p>
+  <h2 class="section-title">작품 사진</h2>
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-item" onclick="isAdmin && triggerUpload('gallery-1')">
+      <div style="text-align:center;">
+        <div class="add-icon">+</div>
+        <div class="add-label">사진 추가</div>
+      </div>
+      <input type="file" id="gallery-1" accept="image/*" onchange="loadGallery(event,this.parentElement)" />
+    </div>
+    <div class="gallery-item" onclick="isAdmin && triggerUpload('gallery-2')">
+      <div style="text-align:center;">
+        <div class="add-icon">+</div>
+        <div class="add-label">사진 추가</div>
+      </div>
+      <input type="file" id="gallery-2" accept="image/*" onchange="loadGallery(event,this.parentElement)" />
+    </div>
+    <div class="gallery-item" onclick="isAdmin && triggerUpload('gallery-3')">
+      <div style="text-align:center;">
+        <div class="add-icon">+</div>
+        <div class="add-label">사진 추가</div>
+      </div>
+      <input type="file" id="gallery-3" accept="image/*" onchange="loadGallery(event,this.parentElement)" />
+    </div>
+    <div class="gallery-item" onclick="isAdmin && triggerUpload('gallery-4')">
+      <div style="text-align:center;">
+        <div class="add-icon">+</div>
+        <div class="add-label">사진 추가</div>
+      </div>
+      <input type="file" id="gallery-4" accept="image/*" onchange="loadGallery(event,this.parentElement)" />
+    </div>
+    <div class="gallery-item" onclick="isAdmin && triggerUpload('gallery-5')">
+      <div style="text-align:center;">
+        <div class="add-icon">+</div>
+        <div class="add-label">사진 추가</div>
+      </div>
+      <input type="file" id="gallery-5" accept="image/*" onchange="loadGallery(event,this.parentElement)" />
+    </div>
+    <div class="gallery-item" onclick="isAdmin && triggerUpload('gallery-6')">
+      <div style="text-align:center;">
+        <div class="add-icon">+</div>
+        <div class="add-label">사진 추가</div>
+      </div>
+      <input type="file" id="gallery-6" accept="image/*" onchange="loadGallery(event,this.parentElement)" />
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- VIDEO -->
+<div class="video-section" id="videos">
+  <p class="section-label">Videos</p>
+  <h2 class="section-title" style="font-family:'Noto Serif KR',serif;font-size:1.8rem;font-weight:400;color:var(--text);margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">동영상</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <div class="video-thumb" onclick="isAdmin && promptVideoUrl(1)">
+        <div id="video-1-container">
+          <div class="video-play">▶</div>
+          <div class="video-add-label">동영상 링크 추가</div>
+        </div>
+      </div>
+      <div class="video-body">
+        <p class="video-name" id="video-1-title" contenteditable="false">동영상 제목을 입력하세요</p>
+        <p class="video-desc" id="video-1-desc" contenteditable="false">동영상 설명을 입력하세요</p>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb" onclick="isAdmin && promptVideoUrl(2)">
+        <div id="video-2-container">
+          <div class="video-play">▶</div>
+          <div class="video-add-label">동영상 링크 추가</div>
+        </div>
+      </div>
+      <div class="video-body">
+        <p class="video-name" id="video-2-title" contenteditable="false">동영상 제목을 입력하세요</p>
+        <p class="video-desc" id="video-2-desc" contenteditable="false">동영상 설명을 입력하세요</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">연락처</h2>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <div class="contact-row">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-detail-label">EMAIL</div>
+          <div class="contact-detail-val">24kwai0309@sonline20.sen.go.kr</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">LOCATION</div>
+          <div class="contact-detail-val" id="location-val" contenteditable="false">서울, 대한민국</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-detail-label">PHONE</div>
+          <div class="contact-detail-val" id="phone-val" contenteditable="false">연락처를 입력하세요</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">🔗</div>
+        <div>
+          <div class="contact-detail-label">SNS / 기타</div>
+          <div class="contact-detail-val" id="sns-val" contenteditable="false">링크를 입력하세요</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <input type="text" placeholder="이름" />
+      <input type="email" placeholder="이메일" />
+      <textarea placeholder="메시지를 입력하세요..."></textarea>
+      <button onclick="alert('메시지가 전송되었습니다! (실제 전송을 위해서는 서버 연결이 필요합니다)')">메시지 보내기</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 이원준 · All Rights Reserved</p>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal-bg" id="loginModal">
+  <div class="modal">
+    <h2>관리자 로그인</h2>
+    <p>포트폴리오를 수정하려면 로그인하세요</p>
+    <input type="text" id="login-id" placeholder="아이디" />
+    <input type="password" id="login-pw" placeholder="비밀번호" onkeydown="if(event.key==='Enter')doLogin()" />
+    <div class="modal-error" id="login-error"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeLogin()">취소</button>
+      <button class="btn-login" onclick="doLogin()">로그인</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  <span>🛠 관리자 모드 · 텍스트를 클릭하여 편집하세요</span>
+  <button onclick="saveChanges()">저장</button>
+  <button class="logout" onclick="doLogout()">로그아웃</button>
+</div>
+
+<script>
+const ADMIN_ID = 'qwer1234';
+const ADMIN_PW = 'qwer1234';
+let isAdmin = false;
+
+function openLogin() {
+  document.getElementById('loginModal').classList.add('active');
+  document.getElementById('login-id').focus();
+}
+function closeLogin() {
+  document.getElementById('loginModal').classList.remove('active');
+  document.getElementById('login-error').textContent = '';
+  document.getElementById('login-id').value = '';
+  document.getElementById('login-pw').value = '';
+}
+function doLogin() {
+  const id = document.getElementById('login-id').value.trim();
+  const pw = document.getElementById('login-pw').value.trim();
+  if (id === ADMIN_ID && pw === ADMIN_PW) {
+    isAdmin = true;
+    closeLogin();
+    document.getElementById('adminBar').classList.add('active');
+    enableEditing(true);
+    document.getElementById('add-activity-btn').style.display = 'block';
+    document.querySelector('.nav-admin-btn').textContent = '편집 중';
+    document.querySelector('.nav-admin-btn').style.background = 'var(--accent)';
+    document.querySelector('.nav-admin-btn').style.color = '#000';
+  } else {
+    document.getElementById('login-error').textContent = '아이디 또는 비밀번호가 올바르지 않습니다.';
+  }
+}
+function doLogout() {
+  isAdmin = false;
+  document.getElementById('adminBar').classList.remove('active');
+  enableEditing(false);
+  document.getElementById('add-activity-btn').style.display = 'none';
+  document.querySelector('.nav-admin-btn').textContent = '관리자';
+  document.querySelector('.nav-admin-btn').style.background = 'none';
+  document.querySelector('.nav-admin-btn').style.color = 'var(--accent)';
+}
+function enableEditing(on) {
+  const editables = document.querySelectorAll('[contenteditable]');
+  editables.forEach(el => {
+    el.contentEditable = on ? 'true' : 'false';
+    el.style.cursor = on ? 'text' : '';
+  });
+}
+function saveChanges() {
+  const data = {};
+  document.querySelectorAll('[contenteditable]').forEach((el, i) => {
+    data['field_'+i] = el.innerHTML;
+  });
+  alert('변경사항이 저장되었습니다! ✅\n(실제 서버 저장을 위해서는 백엔드 연동이 필요합니다)');
+}
+
+function triggerUpload(id) {
+  if (!isAdmin) return;
+  document.getElementById(id).click();
+}
+function loadImage(event, imgId, placeholderId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const img = document.getElementById(imgId);
+  img.src = url;
+  img.style.display = 'block';
+  document.getElementById(placeholderId).style.display = 'none';
+}
+function loadProjImage(event, imgId, placeholderId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const img = document.getElementById(imgId);
+  img.src = url;
+  img.style.display = 'block';
+  document.getElementById(placeholderId).style.display = 'none';
+}
+function loadGallery(event, container) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  container.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;" />';
+}
+function promptVideoUrl(n) {
+  if (!isAdmin) return;
+  const url = prompt('YouTube 또는 동영상 URL을 입력하세요:');
+  if (!url) return;
+  let embedUrl = url;
+  const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([a-zA-Z0-9_-]+)/);
+  if (ytMatch) embedUrl = 'https://www.youtube.com/embed/' + ytMatch[1];
+  const container = document.getElementById('video-'+n+'-container');
+  container.innerHTML = '<iframe src="'+embedUrl+'" width="100%" height="160" style="border:none;" allowfullscreen></iframe>';
+}
+function addActivity() {
+  if (!isAdmin) return;
+  const list = document.getElementById('activity-list');
+  const div = document.createElement('div');
+  div.className = 'activity-card';
+  div.innerHTML = '<p class="activity-period" contenteditable="true">기간을 입력하세요</p><p class="activity-title" contenteditable="true">활동명을 입력하세요</p><p class="activity-desc" contenteditable="true">활동 내용을 입력하세요</p>';
+  list.appendChild(div);
+}
+</script>
+</body>
+</html>
